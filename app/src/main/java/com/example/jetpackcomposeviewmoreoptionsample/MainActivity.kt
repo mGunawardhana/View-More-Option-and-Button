@@ -5,11 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +30,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp(names: List<String> = listOf("World", "mGunawardhana")) {
+fun MyApp(){
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
+
+    if(shouldShowOnboarding){
+        OnboardingScreen()
+    }else{
+        Greetings()
+    }
+}
+
+
+
+@Composable
+fun Greetings(names: List<String> = listOf("World", "mGunawardhana")) {
     // A surface container using the 'background' color from the theme
     Surface(color = MaterialTheme.colors.onPrimary) {
         Column(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -76,11 +87,9 @@ fun Greeting(name: String) {
         }
     }
 }
+
 @Composable
 fun OnboardingScreen() {
-    // TODO: This state should be hoisted
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
-
     Surface {
         Column(
             modifier = Modifier.fillMaxSize(),
